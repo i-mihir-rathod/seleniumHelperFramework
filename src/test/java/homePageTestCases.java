@@ -64,33 +64,54 @@ public class homePageTestCases extends Base {
     @Test
     public void addToCartOneProduct() {
         // Step 1: Initialize home page object
+        var homePage = new HomePageObject(driver);
+
         // Step 2: Get product data from factory
-        HomePageObject homePage = new HomePageObject(driver);
-        ProductDetails productDetails = ProductDataFactory.addOneProduct();
+        var productDetails = ProductDataFactory.addOneProduct().getName();
 
         // Step 3: Add product to cart
-        homePage.addProductsToCart(productDetails.getName());
+        homePage.addProductsToCart(productDetails);
 
         // Step 4: Verify product is in cart
-        verifyProductInMiniCart(homePage, productDetails.getName());
+        verifyProductInMiniCart(productDetails);
     }
 
     // Test: Add multiple products to cart and verify all appear in cart items list
     @Test
     public void addToCartMultipleProducts() {
-        // Step 1: Initialize home page object // Step 2: Get multiple products data from factory
+        // Step 1: Initialize home page object
         HomePageObject homePage = new HomePageObject(driver);
-        List<ProductDetails> productDetails = ProductDataFactory.MultiPleProduct();
+
+        // Step 2: Get multiple products data from factory
+        var productDetails = ProductDataFactory.MultiPleProduct().getName();
 
         // Step 3: Add all products to cart
-        for (ProductDetails product : productDetails) {
-            homePage.addProductsToCart(product.getName());
+        for (var product : productDetails) {
+            homePage.addProductsToCart(product);
         }
 
         // Step 4: Verify all products are in cart
-        for (ProductDetails product : productDetails) {
-            verifyProductInMiniCart(homePage, product.getName());
+        verifyProductInMiniCart(productDetails);
+    }
+
+    @Test
+    public void verifyToCalculateTotalPriceInMiniCart() {
+        // Step 1: Initialize home page object
+        var homePage = new HomePageObject(driver);
+
+        // Step 2: Get multiple products data from factory
+        var productDetails = ProductDataFactory.MultiPleProduct().getName();
+
+        // Step 3: Add all products to cart
+        for (var product : productDetails) {
+            homePage.addProductsToCart(product);
         }
+
+        // Step 4: Verify all products are in cart
+        verifyProductInMiniCart(productDetails);
+
+        // Calculate and verify total price in mini cart
+        calculateTotalPrice(productDetails);
     }
 
     // Test: Verify home page title
@@ -127,7 +148,7 @@ public class homePageTestCases extends Base {
         var homePage = new HomePageObject(driver);
 
         // add to cart product
-        String products = ProductDataFactory.addOneProduct().getName();
+        var products = ProductDataFactory.addOneProduct().getName();
         homePage.addProductsToCart(products);
 
         // click on mini cart and view cart button
@@ -147,17 +168,76 @@ public class homePageTestCases extends Base {
 
     // ============ Helper Methods ============
 
+    private void verifyProductInMiniCart(String... productName) {
+        // Initialize Page Object
+        var homePage =  new HomePageObject(driver);
+
+        // Click on Mini Cart Button
+        homePage.clickOnMiniCart();
+
+        for (var product : productName) {
+            Assert.assertTrue(
+                    homePage.isProductInCart(product),
+                    "Product not added to cart: " + product
+            );
+        }
+    }
+
     /**
-     * Verifies that a product is displayed in the shopping cart
+     * Calculates the total price in mini cart by:
+     * 1. Getting the list of products and their prices from mini cart
+     * 2. Calculating subtotal by summing all product amounts
+     * 3. Adding $2 eco tax for each item
+     * 4. Adding 20% VAT on (subtotal + eco tax)
+     * 5. Returning the final total amount
      *
-     * @param homePage    Home page object instance
-     * @param productName Name of the product to verify
+     * @return Final total price as a double value
      */
-    private void verifyProductInMiniCart(HomePageObject homePage, String productName) {
-        List<String> miniCartItems = homePage.getMiniCartItems();
-        Assert.assertTrue(
-                homePage.isProductInCart(productName),
-                "Product not added to cart: " + miniCartItems
-        );
+    private void calculateTotalPrice(String... productName) {
+
+        // Step 1: Initialize page object
+        HomePageObject homePage = new HomePageObject(driver);
+
+        // Step 2: Get the list of products and their prices in mini cart
+        List<String> cartItems = homePage.getMiniCartItemsList();
+//        List<String> cartItemsPrices = homePage.getMiniCartItemsPriceText();
+        int itemCount = cartItems.size();
+
+        // Step 3: Calculate subtotal by summing all product amounts
+
+        double subTotal = 0.00;
+        for (var productPrice : productName) {
+            double tax = parsePrice(homePage.getProductPriceWithoutTax(productPrice));
+            subTotal += tax;
+        }
+
+        Assert.assertEquals(homePage.getMiniCartSubTotalPriceText(), "$" + String.format("%.2f", subTotal), "Subtotal does not match sum of product prices");
+
+        // Step 4: Calculate eco tax ($2 for each item)
+        double ecoTaxAmount = 2.0 * itemCount;
+        Assert.assertEquals(homePage.getMiniCartEcoTaxPrice(), "$" + String.format("%.2f", ecoTaxAmount), "Eco tax does not match expected amount");
+
+        // Step 5: Calculate VAT (20% of subtotal)
+        double vatAmount = subTotal * 0.20; // 20% VAT
+        Assert.assertEquals(homePage.getMiniCartVatPrice(), "$" + String.format("%.2f", vatAmount), "Vat does not match expected amount");
+
+        // Step 6: Calculate and return the final total
+        double finalTotal = subTotal + ecoTaxAmount + vatAmount;
+        Assert.assertEquals(homePage.getMiniCartTotalPrice(), "$" + String.format("%.2f", finalTotal), "Total does not match expected amount");
+    }
+
+    /**
+     * Helper method to parse price string and extract numeric value
+     * Removes currency symbols and returns the price as double
+     *
+     * @param priceStr The price string (e.g., "$50.00")
+     * @return The price as a double value
+     */
+    private double parsePrice(String priceStr) {
+        if (priceStr == null || priceStr.isEmpty()) {
+            return 0.0;
+        }
+        // Remove all non-numeric characters except the decimal point
+        return Double.parseDouble(priceStr.replaceAll("[^\\d.]", ""));
     }
 }

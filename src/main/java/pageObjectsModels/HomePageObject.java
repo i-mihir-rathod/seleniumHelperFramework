@@ -16,12 +16,17 @@ public class HomePageObject extends BasePageObject {
     private final By loginLink = By.xpath("//a[@title = 'My Account']/following-sibling::ul//a[text() = 'Login']");
     private final By searchInput = By.name("search");
     private final By searchButton = By.xpath("//input[@name = 'search']/following-sibling::span/button");
-    private final By miniCartButton = By.xpath("//div[@id = 'cart']/button");
     private final By shoppingCartLink = By.xpath("//a[@title = 'Shopping Cart']");
     private final By successAlert = By.xpath("//div[contains(@class, 'alert-success')]");
 
-    // ============ In cart popup Locators ============
-    private final By cartItemsList = By.xpath("//ul[@class='dropdown-menu pull-right']//td[@class='text-left']/a");
+    // ============ miniCart popup Locators ============
+    private final By miniCartButton = By.xpath("//div[@id = 'cart']/button");
+    private final By cartItemsList = By.xpath("//table[contains(@class, 'table-striped')]//td[@class='text-left']/a");
+    private final By cartItemsPriceList = By.xpath("//table[contains(@class, 'table-striped')]//td[contains(text(), '$')]");
+    private final By subTotalPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'Sub-Total']/parent::td/following-sibling::td");
+    private final By ecoTaxPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'Eco Tax (-2.00)']/parent::td/following-sibling::td");
+    private final By vatPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'VAT (20%)']/parent::td/following-sibling::td");
+    private final By totalPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'Total']/parent::td/following-sibling::td");
     private final By viewCartBtn = By.xpath("//i[contains(@class, 'fa-shopping-cart')]/parent::strong");
     private final By checkOutBtn = By.xpath("//i[contains(@class, 'fa-share')]/parent::strong");
 
@@ -37,6 +42,10 @@ public class HomePageObject extends BasePageObject {
 
     private By getAddToCartButton(String itemName) {
         return By.xpath("//a[contains(text(), '" + itemName + "')]/ancestor::div[@class = 'caption']/following-sibling::div//button[contains(@onclick, 'cart.add')]");
+    }
+
+    private By productPriceWithoutTax(String productName) {
+        return By.xpath("//a[text() = '" + productName + "']/ancestor::div[@class = 'caption']//span[@class = 'price-tax']");
     }
 
     // ============ Constructor ============
@@ -65,6 +74,10 @@ public class HomePageObject extends BasePageObject {
     public void navigateToLogin() {
         clickMyAccountMenu();
         seleniumHelper.clickOnElement(loginLink);
+    }
+
+    public String getProductPriceWithoutTax(String productName) {
+        return seleniumHelper.getText(productPriceWithoutTax(productName));
     }
 
     /**
@@ -103,10 +116,28 @@ public class HomePageObject extends BasePageObject {
      * @return List of product names in the cart
      */
 
-    public List<String> getMiniCartItems() {
-        waitForSuccessMessage();
-        clickOnMiniCart();
+    public List<String> getMiniCartItemsList() {
         return seleniumHelper.getTextFromList(cartItemsList);
+    }
+
+    public List<String> getMiniCartItemsPriceText() {
+        return seleniumHelper.getTextFromList(cartItemsPriceList);
+    }
+
+    public String getMiniCartSubTotalPriceText() {
+        return seleniumHelper.getText(subTotalPrice);
+    }
+
+    public String getMiniCartEcoTaxPrice() {
+        return seleniumHelper.getText(ecoTaxPrice);
+    }
+
+    public String getMiniCartVatPrice() {
+        return seleniumHelper.getText(vatPrice);
+    }
+
+    public String getMiniCartTotalPrice() {
+        return seleniumHelper.getText(totalPrice);
     }
 
     /**

@@ -38,6 +38,6 @@ public class Base {
             File destination = new File("./Screenshots/" + result.getName() + "_" + System.currentTimeMillis() + ".png");
             FileUtils.copyFile(src, destination);
         }
-        driver.quit();
+//        driver.quit();
     }
 }
