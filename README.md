@@ -73,12 +73,12 @@ mvn test
 
 ### Run Specific Test Class
 ```
-mvn test -Dtest=HomePageTestCases
+mvn test -Dtest=homePageTestCases
 ```
 
 ### Run Specific Test Method
 ```
-mvn test -Dtest=HomePageTestCases#addToCartOneProduct
+mvn test -Dtest=homePageTestCases#addToCartOneProduct
 ```
 
 ### Run Tests with Custom Configuration
@@ -110,7 +110,7 @@ myFrameworkSelenium/
 │   │       └── WaitUtils.java
 │   └── test/java/
 │       ├── Base.java                 # Base test class
-│       ├── HomePageTestCases.java    # Home page tests
+│       ├── homePageTestCases.java    # Home page tests
 │       └── RegisterPageTestCases.java # Registration tests
 ├── target/                           # Compiled classes and test reports
 ├── Screenshots/                      # Failure screenshots

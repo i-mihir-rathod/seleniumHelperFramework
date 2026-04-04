@@ -1,5 +1,4 @@
 import dataFactories.ProductDataFactory;
-import dataFactories.RegisterDataFactory;
 import dataObjects.ProductDetails;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -9,7 +8,7 @@ import pageObjectsModels.*;
 import java.util.List;
 import java.util.Objects;
 
-public class HomePageTestCases extends Base {
+public class homePageTestCases extends Base {
 
     // Test: Select currency from dropdown menu
     @Test
