@@ -8,4 +8,6 @@ import lombok.NoArgsConstructor;
 public class ProductDetails {
     private String name;
     private String price;
+    private String withoutTax;
+    private int quantity;
 }

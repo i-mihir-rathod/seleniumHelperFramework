@@ -3,6 +3,7 @@ package pageObjectsModels;
 import dataObjects.ProductDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import java.util.List;
 
 public class HomePageObject extends BasePageObject {
@@ -96,9 +97,7 @@ public class HomePageObject extends BasePageObject {
      * @param itemNames Variable length parameter for product names to add
      */
     public void addProductsToCart(ProductDetails itemNames) {
-        for (String itemName : itemNames) {
-            seleniumHelper.clickOnElement(productAddToCartBtn(itemName));
-        }
+        seleniumHelper.clickOnElement(productAddToCartBtn(itemNames.getName()));
     }
 
     public void openShoppingCart() {
@@ -146,8 +145,8 @@ public class HomePageObject extends BasePageObject {
      * @param productName The name of the product to verify
      * @return true if product is displayed, false otherwise
      */
-    public boolean isProductInCart(String productName) {
-        return seleniumHelper.isElementDisplayed(getProductNameInCart(productName));
+    public boolean isProductInCart(ProductDetails productName) {
+        return seleniumHelper.isElementDisplayed(getProductNameInCart(productName.getName()));
     }
 
     public void clickOnViewCartBtn() {
