@@ -1,8 +1,6 @@
 package dataFactories;
 
 import dataObjects.ProductDetails;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductDataFactory {
 

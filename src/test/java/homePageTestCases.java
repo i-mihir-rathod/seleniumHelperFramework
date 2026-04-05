@@ -86,9 +86,7 @@ public class homePageTestCases extends Base {
         var productDetails = ProductDataFactory.MultiPleProduct().getName();
 
         // Step 3: Add all products to cart
-        for (var product : productDetails) {
-            homePage.addProductsToCart(product);
-        }
+        homePage.addProductsToCart(productDetails);
 
         // Step 4: Verify all products are in cart
         verifyProductInMiniCart(productDetails);
@@ -103,9 +101,7 @@ public class homePageTestCases extends Base {
         var productDetails = ProductDataFactory.MultiPleProduct().getName();
 
         // Step 3: Add all products to cart
-        for (var product : productDetails) {
-            homePage.addProductsToCart(product);
-        }
+        homePage.addProductsToCart(productDetails);
 
         // Step 4: Verify all products are in cart
         verifyProductInMiniCart(productDetails);

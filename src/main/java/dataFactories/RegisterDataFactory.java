@@ -1,24 +1,13 @@
 package dataFactories;
 
 import dataObjects.RegisterPageDataObject;
-
 import java.util.Random;
 import java.util.UUID;
 
 public class RegisterDataFactory {
 
     public static RegisterPageDataObject blankData() {
-        var registerData = new RegisterPageDataObject();
-
-        registerData.setFirstName("");
-        registerData.setLastName("");
-        registerData.setEmail("");
-        registerData.setTelephone("");
-        registerData.setPassword("");
-        registerData.setConfirmPassword("");
-        registerData.setSubscribe("");
-
-        return registerData;
+        return new RegisterPageDataObject();
     }
 
     public static RegisterPageDataObject validData() {

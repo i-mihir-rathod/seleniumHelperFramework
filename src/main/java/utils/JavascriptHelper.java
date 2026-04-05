@@ -4,7 +4,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.File;
 
 public class JavascriptHelper {
 
@@ -36,8 +35,7 @@ public class JavascriptHelper {
     }
 
     public String getTextUsingJS(WebElement element) {
-        return (String) js.executeScript(
-                "return arguments[0].textContent;", element);
+        return (String) js.executeScript("arguments[0].textContent;", element);
     }
 
     public void uploadFile(WebElement element, String fileName, boolean isMultiple) {

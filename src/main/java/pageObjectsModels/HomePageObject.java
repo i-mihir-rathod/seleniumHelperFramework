@@ -1,8 +1,8 @@
 package pageObjectsModels;
 
+import dataObjects.ProductDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.List;
 
 public class HomePageObject extends BasePageObject {
@@ -40,7 +40,7 @@ public class HomePageObject extends BasePageObject {
         return By.xpath("//table//a[text()='" + productName + "']");
     }
 
-    private By getAddToCartButton(String itemName) {
+    private By productAddToCartBtn(String itemName) {
         return By.xpath("//a[contains(text(), '" + itemName + "')]/ancestor::div[@class = 'caption']/following-sibling::div//button[contains(@onclick, 'cart.add')]");
     }
 
@@ -95,9 +95,9 @@ public class HomePageObject extends BasePageObject {
      *
      * @param itemNames Variable length parameter for product names to add
      */
-    public void addProductsToCart(String... itemNames) {
+    public void addProductsToCart(ProductDetails itemNames) {
         for (String itemName : itemNames) {
-            seleniumHelper.clickOnElement(getAddToCartButton(itemName));
+            seleniumHelper.clickOnElement(productAddToCartBtn(itemName));
         }
     }
 
