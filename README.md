@@ -39,7 +39,7 @@ The framework is built using the following technologies and patterns:
 2. **Base Classes**: Provide common setup and teardown
 3. **Data Factories**: Generate test data
 4. **Data Objects**: Represent test data structures
-5. **Utils**: Helper classes for waits, JavaScript, and Selenium operations
+5. **Utils**: Helper classes for waits, JavaScript, Selenium operations, random data generation
 
 ## Prerequisites
 
@@ -54,7 +54,7 @@ The framework is built using the following technologies and patterns:
 
 2. **Navigate to the project directory**:
    ```
-   cd myFrameworkSelenium
+   cd seleniumHelperFramework
    ```
 
 3. **Install dependencies** using Maven:
@@ -62,7 +62,7 @@ The framework is built using the following technologies and patterns:
    mvn clean install
    ```
 
-4. **Ensure ChromeDriver is compatible** with your Chrome browser version. The framework uses WebDriverManager (included in Selenium) to automatically manage drivers.
+4. **Ensure ChromeDriver is compatible** with your Chrome browser version. Selenium 4 manages drivers automatically.
 
 ## Running Tests
 
@@ -87,7 +87,7 @@ You can modify the `Base.java` class to change browser settings or test URL.
 ## Project Structure
 
 ```
-myFrameworkSelenium/
+seleniumHelperFramework/
 ├── pom.xml                           # Maven configuration
 ├── src/
 │   ├── main/java/
@@ -105,11 +105,15 @@ myFrameworkSelenium/
 │   │   │   ├── SearchPageObject.java
 │   │   │   └── ShoppingCartPageObject.java
 │   │   └── utils/                    # Utility classes
+│   │       ├── FileHelper.java
+│   │       ├── FluentWaitUtils.java
 │   │       ├── JavascriptHelper.java
+│   │       ├── RandomDataUtils.java
 │   │       ├── SeleniumHelper.java
 │   │       └── WaitUtils.java
 │   └── test/java/
 │       ├── Base.java                 # Base test class
+│       ├── CartPageTestCases.java    # Cart page tests
 │       ├── homePageTestCases.java    # Home page tests
 │       └── RegisterPageTestCases.java # Registration tests
 ├── target/                           # Compiled classes and test reports

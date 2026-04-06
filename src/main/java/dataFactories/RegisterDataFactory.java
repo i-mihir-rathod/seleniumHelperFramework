@@ -45,7 +45,7 @@ public class RegisterDataFactory {
         registerData.setEmail(RandomDataUtils.generateRandomEmail());
         registerData.setTelephone(RandomDataUtils.generateRandomAlphabetical());
         registerData.setPassword(RandomDataUtils.generateRandomPassword());
-        registerData.setConfirmPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setConfirmPassword(registerData.getPassword());
         registerData.setSubscribe("yes");
 
         return registerData;

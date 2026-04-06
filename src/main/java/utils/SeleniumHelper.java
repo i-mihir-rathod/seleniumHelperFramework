@@ -78,4 +78,8 @@ public class SeleniumHelper {
             js.uploadFile(element, file, false);
         }
     }
+
+    public List<String> getAttributeFromList(By by, String attribute) {
+        return wait.waitUntilElementsToBeVisible(by).stream().map(e -> e.getAttribute(attribute)).toList();
+    }
 }
