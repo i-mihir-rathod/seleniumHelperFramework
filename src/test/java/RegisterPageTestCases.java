@@ -27,10 +27,10 @@ public class RegisterPageTestCases extends Base {
         RegisterPageObject registerPage = navigateToRegisterPage();
 
         // Register with blank data
-        var user = RegisterDataFactory.blankData();
-        registerPage.fillRegisterForm(user);
+        registerPage.clickOnContinueBtn();
 
         // Verify Error message is displayed
+        Assert.assertTrue(registerPage.isWarningMsgDisplayed(), "Warning message not displayed");
         Assert.assertTrue(registerPage.isFirstNameErrorMsgDisplayed(), "First name error message not displayed");
         Assert.assertTrue(registerPage.isLastNameErrorMsgDisplayed(), "Last name error message not displayed");
         Assert.assertTrue(registerPage.isEmailErrorMsgDisplayed(), "Email error message not displayed");
@@ -64,8 +64,10 @@ public class RegisterPageTestCases extends Base {
 
         // \Register with mismatched password & Confirm Password
         var user = RegisterDataFactory.passwordMismatched();
-        registerPage.agreePrivacyPolicy();
+
         registerPage.fillRegisterForm(user);
+        registerPage.agreePrivacyPolicy();
+        registerPage.clickOnContinueBtn();
 
         // Verify error message is displayed
         Assert.assertTrue(registerPage.isConfirmPasswordErrorMsgDisplayed(), "Confirm Password error message not displayed");
@@ -86,6 +88,7 @@ public class RegisterPageTestCases extends Base {
         // Enter alphabetical values in phone number
         var user = RegisterDataFactory.alphabeticalValuesInPhoneNumber();
         registerPage.fillRegisterForm(user);
+        registerPage.clickOnContinueBtn();
 
         // Verify error message displayed
         Assert.assertTrue(registerPage.isTelephoneErrorMsgDisplayed(), "Telephone error message not displayed");
@@ -101,8 +104,10 @@ public class RegisterPageTestCases extends Base {
 
         // Fill register form with valid data
         var registerData = RegisterDataFactory.validData();
-        registerPage.agreePrivacyPolicy();
+
         registerPage.fillRegisterForm(registerData);
+        registerPage.agreePrivacyPolicy();
+        registerPage.clickOnContinueBtn();
     }
     
     // ============ Helper Methods ============

@@ -3,6 +3,7 @@ package pageObjectsModels;
 import dataObjects.ProductDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import java.util.List;
 
 public class HomePageObject extends BasePageObject {
@@ -33,6 +34,10 @@ public class HomePageObject extends BasePageObject {
 
     private By currencyDropdown(String currency) {
         return By.xpath("//ul[@class = 'dropdown-menu']/li/button[contains(text(), '" + currency + "')]");
+    }
+
+    private By getTotalCartItemDropdown(int number) {
+        return By.xpath("//span[contains(text(),'" + number + " item(s)')]");
     }
 
     private By getProductNameInCart(String productName) {
@@ -87,7 +92,7 @@ public class HomePageObject extends BasePageObject {
      * @param itemNames Variable length parameter for product names to add
      */
     public void addProductsToCart(ProductDetails itemNames) {
-        seleniumHelper.clickOnElement(productAddToCartBtn(itemNames.getName()));
+        seleniumHelper.clickUsingFluent(productAddToCartBtn(itemNames.getName()));
     }
 
     public void openShoppingCart() {
@@ -123,6 +128,10 @@ public class HomePageObject extends BasePageObject {
 
     public String getMiniCartTotalPrice() {
         return seleniumHelper.getText(totalPrice);
+    }
+
+    public boolean isCartItemsCountIncreased(int number) {
+        return seleniumHelper.isElementDisplayed(getTotalCartItemDropdown(number));
     }
 
     /**

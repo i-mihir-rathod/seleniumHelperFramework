@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,16 +11,19 @@ public class SeleniumHelper {
     protected WebDriver driver;
     protected WaitUtils wait;
     protected JavascriptHelper js;
+    protected FluentWaitUtils fw;
+
 
     public SeleniumHelper(WebDriver driver) {
         this.driver = driver;
         this.wait = new WaitUtils(driver);
         this.js = new JavascriptHelper(driver);
+        this.fw = new FluentWaitUtils(driver);
     }
 
-    public WebElement scrollToElements(By element) {
-        return js.scrollToElementIfNotVisible(wait.waitUntilElementToBeClickable(element));
-    }
+//    public WebElement scrollToElements(By element) {
+//        return js.scrollToElementIfNotInView(wait.waitUntilElementToBeClickable(element));
+//    }
 
     public boolean isElementDisplayed(By by) {
         WebElement element = null;
@@ -35,14 +37,14 @@ public class SeleniumHelper {
 
     public void enterText(By by, String text) {
         var element = wait.waitUntilElementToBeVisible(by);
-        js.scrollToElementIfNotVisible(element);
+        js.scrollToElementIfNotInView(element);
         element.clear();
         element.sendKeys(text);
     }
 
     public String getText(By by) {
         var element = wait.waitUntilElementToBeVisible(by);
-        js.scrollToElementIfNotVisible(element);
+        js.scrollToElementIfNotInView(element);
         return element.getText();
     }
 
@@ -55,16 +57,21 @@ public class SeleniumHelper {
         return driver.getTitle();
     }
 
+    public void clickUsingFluent(By by) {
+        var element = wait.waitUntilElementToBeClickable(by);
+        fw.clickOnElement(element);
+    }
+
     public void clickOnElement(By by) {
         var element = wait.waitUntilElementToBeClickable(by);
-        js.scrollToElementIfNotVisible(element);
+        js.scrollToElementIfNotInView(element);
         element.click();
     }
 
     public void uploadFile(By by, String fileName) {
         var file = FileHelper.getUploadFilePath(fileName);
         var element = wait.waitForElementPresenceInDOM(by);
-        js.scrollToElementIfNotVisible(element);
+        js.scrollToElementIfNotInView(element);
         if (Objects.equals(element.getDomAttribute("type"), "input")) {
             element.sendKeys(file);
         } else {

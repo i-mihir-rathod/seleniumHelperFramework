@@ -39,12 +39,12 @@ public class RegisterPageObject extends BasePageObject {
         return seleniumHelper.getText(registerAccountTitle);
     }
 
-    public void enterFirstName(String fName) {
-        seleniumHelper.enterText(firstNameInput, fName);
+    public void enterFirstName(String firstName) {
+        seleniumHelper.enterText(firstNameInput, firstName);
     }
 
-    public void enterLastName(String lName) {
-        seleniumHelper.enterText(lastNameInput, lName);
+    public void enterLastName(String lastName) {
+        seleniumHelper.enterText(lastNameInput, lastName);
     }
 
     public void enterEmail(String mail) {
@@ -55,12 +55,12 @@ public class RegisterPageObject extends BasePageObject {
         seleniumHelper.enterText(telephoneInput, number);
     }
 
-    public void enterPassword(String pass) {
-        seleniumHelper.enterText(passwordInput, pass);
+    public void enterPassword(String password) {
+        seleniumHelper.enterText(passwordInput, password);
     }
 
-    public void enterConfirmPassword(String cPass) {
-        seleniumHelper.enterText(confirmPasswordInput, cPass);
+    public void enterConfirmPassword(String confirmPassword) {
+        seleniumHelper.enterText(confirmPasswordInput, confirmPassword);
     }
 
     public void clickOnContinueBtn() {
@@ -152,6 +152,5 @@ public class RegisterPageObject extends BasePageObject {
         enterPassword(registerData.getPassword());
         enterConfirmPassword(registerData.getConfirmPassword());
         subscribeStatus(registerData.getSubscribe());
-        clickOnContinueBtn();
     }
 }

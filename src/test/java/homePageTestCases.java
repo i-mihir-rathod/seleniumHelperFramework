@@ -88,9 +88,12 @@ public class homePageTestCases extends Base {
         // Step 2: Get multiple products data from factory
         var productDetails = ProductDataFactory.MultiPleProduct();
 
-        // Step 3: Add all products to cart
+        // Step 3: Add all products to cart and verify the counts on mini cart text
+        var products= 1;
         for (var product : productDetails) {
             homePage.addProductsToCart(product);
+            Assert.assertTrue(homePage.isCartItemsCountIncreased(products));
+            products++;
         }
 
         // Step 4: Verify all products are in cart
@@ -105,9 +108,12 @@ public class homePageTestCases extends Base {
         // Step 2: Get multiple products data from factory
         var productDetails = ProductDataFactory.MultiPleProduct();
 
-        // Step 3: Add all products to cart
+        // Step 3: Add all products to cart and verify the counts on mini cart text
+        var products= 1;
         for (var product : productDetails) {
             homePage.addProductsToCart(product);
+            Assert.assertTrue(homePage.isCartItemsCountIncreased(products));
+            products++;
         }
 
         // Step 4: Verify all products are in cart
@@ -175,13 +181,16 @@ public class homePageTestCases extends Base {
         var homePage = new HomePageObject(driver);
 
         // Step 2: Get multiple products data from factory
-        var productDetails = ProductDataFactory.MultiPleProduct();
+        var productDetails = ProductDataFactory.AddMultiPleProductWithQuantity();
 
-        // Step 3: Add product list into loop
+        // Step 3: Add all products to cart and verify the counts on mini cart text
+        var products= 1;
         for (var product : productDetails) {
             // Fetch the quantity and add to cart the product
             for (int i = 0; i < product.getQuantity(); i++) {
                 homePage.addProductsToCart(product);
+                Assert.assertTrue(homePage.isCartItemsCountIncreased(products));
+                products++;
             }
         }
 
@@ -200,10 +209,7 @@ public class homePageTestCases extends Base {
         // Click on Mini Cart Button
         homePage.clickOnMiniCart();
         for (var product : productName) {
-            Assert.assertTrue(
-                    homePage.isProductInCart(product),
-                    "Product not added to cart: " + product.getName()
-            );
+            Assert.assertTrue(homePage.isProductInCart(product), "Product not added to cart: " + product.getName());
         }
 
     }

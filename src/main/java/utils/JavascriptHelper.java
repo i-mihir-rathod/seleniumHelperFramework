@@ -27,11 +27,23 @@ public class JavascriptHelper {
         );
     }
 
-    public WebElement scrollToElementIfNotVisible(WebElement element) {
+    // used this method when element is not in view port
+    void scrollToElementCenter(WebElement element) {
+        var jsQuery =
+                """
+                            const elementRect = arguments[0].getBoundingClientRect();
+                            const absoluteElementTop = elementRect.top + window.pageYOffset;
+                            const middle = absoluteElementTop - (window.innerHeight / 2);
+                            window.scrollTo(0, middle);
+                        """;
+        js.executeScript(jsQuery, element);
+    }
+
+    // use this method to check and ensure element is in view port
+    void scrollToElementIfNotInView(WebElement element) {
         if (!isElementInViewport(element)) {
-            js.executeScript("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element);
+            scrollToElementCenter(element);
         }
-        return element;
     }
 
     public String getTextUsingJS(WebElement element) {
