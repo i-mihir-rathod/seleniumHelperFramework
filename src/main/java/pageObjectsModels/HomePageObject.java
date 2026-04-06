@@ -3,26 +3,24 @@ package pageObjectsModels;
 import dataObjects.ProductDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.List;
 
 public class HomePageObject extends BasePageObject {
 
     // ============ Locators ============
 
-    private final By currencyButton = By.xpath("//span[text() = 'Currency']/parent::button");
+    private final By currencyBtn = By.xpath("//span[text() = 'Currency']/parent::button");
     private final By currencyLogo = By.xpath("//span[text() = 'Currency']/preceding-sibling::strong");
-    private final By myAccountButton = By.xpath("//a[@title = 'My Account']");
+    private final By myAccountBtn = By.xpath("//a[@title = 'My Account']");
     private final By registerLink = By.xpath("//a[@title = 'My Account']/following-sibling::ul//a[text() = 'Register']");
     private final By loginLink = By.xpath("//a[@title = 'My Account']/following-sibling::ul//a[text() = 'Login']");
     private final By searchInput = By.name("search");
-    private final By searchButton = By.xpath("//input[@name = 'search']/following-sibling::span/button");
+    private final By searchBtn = By.xpath("//input[@name = 'search']/following-sibling::span/button");
     private final By shoppingCartLink = By.xpath("//a[@title = 'Shopping Cart']");
     private final By successAlert = By.xpath("//div[contains(@class, 'alert-success')]");
 
     // ============ miniCart popup Locators ============
-    private final By miniCartButton = By.xpath("//div[@id = 'cart']/button");
-    private final By cartItemsList = By.xpath("//table[contains(@class, 'table-striped')]//td[@class='text-left']/a");
+    private final By miniCartBtn = By.xpath("//div[@id = 'cart']/button");
     private final By cartItemsPriceList = By.xpath("//table[contains(@class, 'table-striped')]//td[contains(text(), '$')]");
     private final By subTotalPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'Sub-Total']/parent::td/following-sibling::td");
     private final By ecoTaxPrice = By.xpath("//table[contains(@class, 'table-bordered')]//strong[text() = 'Eco Tax (-2.00)']/parent::td/following-sibling::td");
@@ -45,10 +43,6 @@ public class HomePageObject extends BasePageObject {
         return By.xpath("//a[contains(text(), '" + itemName + "')]/ancestor::div[@class = 'caption']/following-sibling::div//button[contains(@onclick, 'cart.add')]");
     }
 
-    private By productPriceWithoutTax(String productName) {
-        return By.xpath("//a[text() = '" + productName + "']/ancestor::div[@class = 'caption']//span[@class = 'price-tax']");
-    }
-
     // ============ Constructor ============
 
     public HomePageObject(WebDriver driver) {
@@ -63,7 +57,7 @@ public class HomePageObject extends BasePageObject {
      * @param currency The currency code to select
      */
     public void selectCurrency(String currency) {
-        seleniumHelper.clickOnElement(currencyButton);
+        seleniumHelper.clickOnElement(currencyBtn);
         seleniumHelper.clickOnElement(currencyDropdown(currency));
     }
 
@@ -77,10 +71,6 @@ public class HomePageObject extends BasePageObject {
         seleniumHelper.clickOnElement(loginLink);
     }
 
-    public String getProductPriceWithoutTax(String productName) {
-        return seleniumHelper.getText(productPriceWithoutTax(productName));
-    }
-
     /**
      * Searches for a product by name
      *
@@ -88,7 +78,7 @@ public class HomePageObject extends BasePageObject {
      */
     public void searchProduct(String productName) {
         seleniumHelper.enterText(searchInput, productName);
-        seleniumHelper.clickOnElement(searchButton);
+        seleniumHelper.clickOnElement(searchBtn);
     }
 
     /**
@@ -106,7 +96,7 @@ public class HomePageObject extends BasePageObject {
 
     public void clickOnMiniCart() {
         waitForSuccessMessage();
-        seleniumHelper.clickOnElement(miniCartButton);
+        seleniumHelper.clickOnElement(miniCartBtn);
     }
 
     /**
@@ -114,10 +104,6 @@ public class HomePageObject extends BasePageObject {
      *
      * @return List of product names in the cart
      */
-
-    public List<String> getMiniCartItemsList() {
-        return seleniumHelper.getTextFromList(cartItemsList);
-    }
 
     public List<String> getMiniCartItemsPriceText() {
         return seleniumHelper.getTextFromList(cartItemsPriceList);
@@ -160,10 +146,10 @@ public class HomePageObject extends BasePageObject {
     // ============ Private Helper Methods ============
 
     private void waitForSuccessMessage() {
-        wait.waitUntilElementToBeVisible(successAlert);
+        seleniumHelper.isElementDisplayed(successAlert);
     }
 
     private void clickMyAccountMenu() {
-        seleniumHelper.clickOnElement(myAccountButton);
+        seleniumHelper.clickOnElement(myAccountBtn);
     }
 }

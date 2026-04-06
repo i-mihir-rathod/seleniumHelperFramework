@@ -71,12 +71,12 @@ public class homePageTestCases extends Base {
         var productDetails = ProductDataFactory.addOneProduct();
 
         // Step 3: Add product to cart
-        homePage.addProductsToCart((ProductDetails) productDetails);
+        homePage.addProductsToCart(productDetails);
 
         // Step 4: Verify product is in cart
-        verifyProductInMiniCart((ProductDetails) productDetails);
+        verifyProductInMiniCart(Collections.singletonList(productDetails));
 
-        calculateTotalPrice(productDetails);
+        calculateTotalPrice(Collections.singletonList(productDetails));
     }
 
     // Test: Add multiple products to cart and verify all appear in cart items list
@@ -94,9 +94,7 @@ public class homePageTestCases extends Base {
         }
 
         // Step 4: Verify all products are in cart
-        for (var product : productDetails) {
-            verifyProductInMiniCart(product);
-        }
+        verifyProductInMiniCart(productDetails);
     }
 
     @Test
@@ -113,9 +111,7 @@ public class homePageTestCases extends Base {
         }
 
         // Step 4: Verify all products are in cart
-        for (var product : productDetails) {
-            verifyProductInMiniCart(product);
-        }
+        verifyProductInMiniCart(productDetails);
 
         // Calculate and verify total price in mini cart
         calculateTotalPrice(productDetails);
@@ -156,7 +152,7 @@ public class homePageTestCases extends Base {
 
         // add to cart product
         var products = ProductDataFactory.addOneProduct();
-//        homePage.addProductsToCart(products);
+        homePage.addProductsToCart(products);
 
         // click on mini cart and view cart button
         homePage.clickOnMiniCart();
@@ -173,27 +169,51 @@ public class homePageTestCases extends Base {
         var element = driver.findElement(By.id("file-upload"));
     }
 
-    // ============ Helper Methods ============
-
-    private void verifyProductInMiniCart(ProductDetails productName) {
-        // Initialize Page Object
+    @Test
+    public void addToCartProductsBasedOnQuantity() {
+        // Step 1: Initialize home page object
         var homePage = new HomePageObject(driver);
 
+        // Step 2: Get multiple products data from factory
+        var productDetails = ProductDataFactory.MultiPleProduct();
+
+        // Step 3: Add product list into loop
+        for (var product : productDetails) {
+            // Fetch the quantity and add to cart the product
+            for (int i = 0; i < product.getQuantity(); i++) {
+                homePage.addProductsToCart(product);
+            }
+        }
+
+        // Step 4: Verify all products are in cart
+        verifyProductInMiniCart(productDetails);
+
+        // Step 5: Calculate and verify total price in mini cart
+        calculateTotalPrice(productDetails);
+    }
+
+    // ============ Helper Methods ============
+
+    private void verifyProductInMiniCart(List<ProductDetails> productName) {
+        // Initialize Page Object
+        var homePage = new HomePageObject(driver);
         // Click on Mini Cart Button
         homePage.clickOnMiniCart();
-        Assert.assertTrue(
-                homePage.isProductInCart(productName),
-                "Product not added to cart: " + productName
-        );
+        for (var product : productName) {
+            Assert.assertTrue(
+                    homePage.isProductInCart(product),
+                    "Product not added to cart: " + product.getName()
+            );
+        }
 
     }
 
     /**
      * Calculates the total price in mini cart by using data factory calculations
      * and verifies against the actual values displayed in the UI:
-     *
+     * <p>
      * Calculation Formula:
-     * 1. SubTotal = Price × Quantity for each product (sum of all products)
+     * 1. SubTotal = Without tax price × Quantity for each product (sum of all products)
      * 2. Eco Tax = $2 per quantity (across all items in cart)
      * 3. VAT = 20% of SubTotal (calculated on subtotal only, not including eco tax)
      * 4. Final Total = SubTotal + Eco Tax + VAT
@@ -208,9 +228,9 @@ public class homePageTestCases extends Base {
         // Step 2: Calculate SubTotal (price × quantity for each item)
         double expectedSubtotal = 0.0;
         for (ProductDetails product : productDetails) {
-            double price = Double.parseDouble(product.getPrice());
+            double withoutTaxPrice = Double.parseDouble(product.getWithoutTax());
             int quantity = product.getQuantity();
-            double itemAmount = price * quantity;
+            double itemAmount = withoutTaxPrice * quantity;
             expectedSubtotal += itemAmount;
         }
         Assert.assertEquals(homePage.getMiniCartSubTotalPriceText(), "$" + String.format("%.2f", expectedSubtotal), "Sub-total price does not match");
@@ -232,20 +252,5 @@ public class homePageTestCases extends Base {
         // Step 6: Calculate Final Total (SubTotal + Eco Tax + VAT)
         double expectedTotal = expectedSubtotal + expectedEcoTax + expectedVat;
         Assert.assertEquals(homePage.getMiniCartTotalPrice(), "$" + String.format("%.2f", expectedTotal), "Total does not match");
-    }
-
-    /**
-     * Helper method to parse price string and extract numeric value
-     * Removes currency symbols and returns the price as double
-     *
-     * @param priceStr The price string (e.g., "$50.00")
-     * @return The price as a double value
-     */
-    private double parsePrice(String priceStr) {
-        if (priceStr == null || priceStr.isEmpty()) {
-            return 0.0;
-        }
-        // Remove all non-numeric characters except the decimal point
-        return Double.parseDouble(priceStr.replaceAll("[^\\d.]", ""));
     }
 }

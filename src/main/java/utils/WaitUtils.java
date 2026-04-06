@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class WaitUtils {
     }
 
 
-        public void waitForPageContentLoaded() throws InterruptedException {
+    public void waitForPageContentLoaded() throws InterruptedException {
         try {
             String documentReadyState;
             var retries = 5;

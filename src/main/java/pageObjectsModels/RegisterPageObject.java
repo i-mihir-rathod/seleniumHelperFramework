@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class RegisterPageObject extends BasePageObject {
+
     // ============ Locators ============
 
     private final By registerAccountTitle = By.xpath("//div[@id = 'content']/h1");
@@ -16,8 +17,8 @@ public class RegisterPageObject extends BasePageObject {
     private final By confirmPasswordInput = By.id("input-confirm");
     private final By continueBtn = By.xpath("//input[@value = 'Continue']");
     private final By privacyPolicyCheckBox = By.xpath("//input[@name = 'agree']");
-    private final By subscribeCheckBoxYes = By.xpath("//label[text() = 'Subscribe']/following-sibling::div//input[@value = '1']");
-    private final By subscribeCheckBoxNo = By.xpath("//label[text() = 'Subscribe']/following-sibling::div//input[@value = '0']");
+    private final By subscribeCheckBoxYes = By.xpath("//label[normalize-space()='Yes']/input");
+    private final By subscribeCheckBoxNo = By.xpath("//label[normalize-space()='No']/input");
     private final By loginPageLink = By.partialLinkText("login page");
     private final By warningMsg = By.xpath("//div[contains(@class, 'alert-danger')]");
 
@@ -153,6 +154,4 @@ public class RegisterPageObject extends BasePageObject {
         subscribeStatus(registerData.getSubscribe());
         clickOnContinueBtn();
     }
-
-
 }

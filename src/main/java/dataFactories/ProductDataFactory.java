@@ -3,12 +3,11 @@ package dataFactories;
 import dataObjects.ProductDetails;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProductDataFactory {
 
-    public static List<ProductDetails> addOneProduct() {
+    public static ProductDetails addOneProduct() {
 
         // Create an object and add one product and return it to be used in test case
         ProductDetails product = new ProductDetails();
@@ -19,7 +18,7 @@ public class ProductDataFactory {
         product.setWithoutTax("500.00"); // Assuming a tax of $102.00 for demonstration
         product.setQuantity(1);
 
-        return Collections.singletonList(product);
+        return product;
     }
 
     public static List<ProductDetails> MultiPleProduct() {

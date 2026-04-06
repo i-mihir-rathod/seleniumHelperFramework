@@ -1,8 +1,7 @@
 package dataFactories;
 
 import dataObjects.RegisterPageDataObject;
-import java.util.Random;
-import java.util.UUID;
+import utils.RandomDataUtils;
 
 public class RegisterDataFactory {
 
@@ -12,13 +11,12 @@ public class RegisterDataFactory {
 
     public static RegisterPageDataObject validData() {
         var registerData = new RegisterPageDataObject();
-        String uniqueId = UUID.randomUUID().toString().substring(0, 5);
 
-        registerData.setFirstName("Test" + uniqueId);
-        registerData.setLastName("User" + uniqueId);
-        registerData.setEmail("test" + uniqueId + "@test.com");
-        registerData.setTelephone(generatePhoneNumber());
-        registerData.setPassword("1234");
+        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
+        registerData.setLastName(RandomDataUtils.generateRandomLastName());
+        registerData.setEmail(RandomDataUtils.generateRandomEmail());
+        registerData.setTelephone(RandomDataUtils.generateRandomPhoneNumber());
+        registerData.setPassword(RandomDataUtils.generateRandomPassword());
         registerData.setConfirmPassword(registerData.getPassword());
         registerData.setSubscribe("yes");
 
@@ -27,14 +25,13 @@ public class RegisterDataFactory {
 
     public static RegisterPageDataObject passwordMismatched() {
         var registerData = new RegisterPageDataObject();
-        String uniqueId = UUID.randomUUID().toString().substring(0, 5);
 
-        registerData.setFirstName("Test" + uniqueId);
-        registerData.setLastName("User" + uniqueId);
-        registerData.setEmail("test" + uniqueId + "@test.com");
-        registerData.setTelephone(generatePhoneNumber());
-        registerData.setPassword(uniqueId);
-        registerData.setConfirmPassword(uniqueId + "mismatch");
+        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
+        registerData.setLastName(RandomDataUtils.generateRandomLastName());
+        registerData.setEmail(RandomDataUtils.generateRandomEmail());
+        registerData.setTelephone(RandomDataUtils.generateRandomPhoneNumber());
+        registerData.setPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setConfirmPassword(RandomDataUtils.generateRandomPassword());
         registerData.setSubscribe("yes");
 
         return registerData;
@@ -42,27 +39,15 @@ public class RegisterDataFactory {
 
     public static RegisterPageDataObject alphabeticalValuesInPhoneNumber() {
         var registerData = new RegisterPageDataObject();
-        String uniqueId = UUID.randomUUID().toString().substring(0, 5);
 
-        registerData.setFirstName("Test" + uniqueId);
-        registerData.setLastName("User" + uniqueId);
-        registerData.setEmail("test" + uniqueId + "@test.com");
-        registerData.setTelephone(uniqueId);
-        registerData.setPassword(uniqueId);
-        registerData.setConfirmPassword(uniqueId);
+        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
+        registerData.setLastName(RandomDataUtils.generateRandomLastName());
+        registerData.setEmail(RandomDataUtils.generateRandomEmail());
+        registerData.setTelephone(RandomDataUtils.generateRandomAlphabetical());
+        registerData.setPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setConfirmPassword(RandomDataUtils.generateRandomPassword());
         registerData.setSubscribe("yes");
 
         return registerData;
-    }
-
-    private static String generatePhoneNumber() {
-        Random random = new Random();
-        StringBuilder phone = new StringBuilder("9"); //  start with 9 (valid Indian style)
-
-        for (int i = 0; i < 9; i++) {
-            phone.append(random.nextInt(10)); // append 9 random digits
-        }
-
-        return phone.toString();
     }
 }

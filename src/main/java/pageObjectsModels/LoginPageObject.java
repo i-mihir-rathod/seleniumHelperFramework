@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class LoginPageObject extends BasePageObject {
 
     // ============ Locators  ============
-    private final By returningCustomerTitle = By.xpath("//form[@method = 'post']/preceding-sibling::h2");
+    private final By returningCustomerTitle = By.xpath("//h2[text() = 'Returning Customer']");
 
     // ============ Constructor  ============
     public LoginPageObject(WebDriver driver) {
@@ -15,6 +15,7 @@ public class LoginPageObject extends BasePageObject {
 
     // ============ Actions  ============
     public String getReturningCustomerTitle() {
-        return wait.waitUntilElementToBeVisible(returningCustomerTitle).getText();
+        seleniumHelper.isElementDisplayed(returningCustomerTitle);
+        return seleniumHelper.getText(returningCustomerTitle);
     }
 }

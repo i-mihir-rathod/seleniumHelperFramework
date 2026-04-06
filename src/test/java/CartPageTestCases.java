@@ -36,6 +36,7 @@ public class CartPageTestCases extends Base {
 
         // Step 4: Verify redirection to home page
         String homePageUrl = driver.getCurrentUrl();
+        Assert.assertNotNull(homePageUrl);
         Assert.assertTrue(homePageUrl.contains("home"), "User Not redirected to home page");
     }
 
