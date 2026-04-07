@@ -1,7 +1,6 @@
 package utils;
 
 import com.google.common.base.Function;
-import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +11,7 @@ import java.util.NoSuchElementException;
 
 public class FluentWaitUtils {
     protected FluentWait<WebDriver> fw;
-    protected JavascriptHelper js;
+    protected JavaScriptHelper js;
 
     // Constructor
     public FluentWaitUtils(WebDriver driver) {
@@ -21,7 +20,7 @@ public class FluentWaitUtils {
                 .pollingEvery(Duration.ofSeconds(2))          // polling every 2 sec
                 .ignoring(ElementNotInteractableException.class)
                 .ignoring(NoSuchElementException.class);
-        this.js = new JavascriptHelper(driver);
+        this.js = new JavaScriptHelper(driver);
     }
 
     // Action Methods

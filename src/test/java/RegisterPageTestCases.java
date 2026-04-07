@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjectsModels.HomePageObject;
 import pageObjectsModels.LoginPageObject;
 import pageObjectsModels.RegisterPageObject;
+import utils.UserDataManager;
 
 public class RegisterPageTestCases extends Base {
 
@@ -103,11 +104,14 @@ public class RegisterPageTestCases extends Base {
         RegisterPageObject registerPage = navigateToRegisterPage();
 
         // Fill register form with valid data
-        var registerData = RegisterDataFactory.validData();
+        var user = RegisterDataFactory.validData();
 
-        registerPage.fillRegisterForm(registerData);
+        registerPage.fillRegisterForm(user);
         registerPage.agreePrivacyPolicy();
         registerPage.clickOnContinueBtn();
+
+        // save user data
+        UserDataManager.saveUser(user);
     }
     
     // ============ Helper Methods ============
@@ -124,10 +128,6 @@ public class RegisterPageTestCases extends Base {
         // Verify Register account title
         String actualPageTitle = registerPage.getRegisterAccountTitle();
         Assert.assertEquals(actualPageTitle, "Register Account", "Register Account Title mismatched");
-
-        // Verify Register Account Title
-        String actualText = registerPage.getRegisterAccountTitle();
-        Assert.assertEquals(actualText, "Register Account", "Register Account Title mismatched");
 
         return registerPage;
     }

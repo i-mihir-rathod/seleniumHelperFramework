@@ -1,7 +1,7 @@
 package dataFactories;
 
 import dataObjects.RegisterPageDataObject;
-import utils.RandomDataUtils;
+import utils.RandomDataGenerator;
 
 public class RegisterDataFactory {
 
@@ -12,13 +12,13 @@ public class RegisterDataFactory {
     public static RegisterPageDataObject validData() {
         var registerData = new RegisterPageDataObject();
 
-        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
-        registerData.setLastName(RandomDataUtils.generateRandomLastName());
-        registerData.setEmail(RandomDataUtils.generateRandomEmail());
-        registerData.setTelephone(RandomDataUtils.generateRandomPhoneNumber());
-        registerData.setPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
+        registerData.setLastName(RandomDataGenerator.generateRandomLastName());
+        registerData.setEmail(RandomDataGenerator.generateRandomEmail());
+        registerData.setTelephone(RandomDataGenerator.generateRandomPhoneNumber());
+        registerData.setPassword(RandomDataGenerator.generateRandomPassword());
         registerData.setConfirmPassword(registerData.getPassword());
-        registerData.setSubscribe("yes");
+        registerData.setSubscribe("Yes");
 
         return registerData;
     }
@@ -26,12 +26,12 @@ public class RegisterDataFactory {
     public static RegisterPageDataObject passwordMismatched() {
         var registerData = new RegisterPageDataObject();
 
-        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
-        registerData.setLastName(RandomDataUtils.generateRandomLastName());
-        registerData.setEmail(RandomDataUtils.generateRandomEmail());
-        registerData.setTelephone(RandomDataUtils.generateRandomPhoneNumber());
-        registerData.setPassword(RandomDataUtils.generateRandomPassword());
-        registerData.setConfirmPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
+        registerData.setLastName(RandomDataGenerator.generateRandomLastName());
+        registerData.setEmail(RandomDataGenerator.generateRandomEmail());
+        registerData.setTelephone(RandomDataGenerator.generateRandomPhoneNumber());
+        registerData.setPassword(RandomDataGenerator.generateRandomPassword());
+        registerData.setConfirmPassword(RandomDataGenerator.generateRandomPassword());
         registerData.setSubscribe("yes");
 
         return registerData;
@@ -40,11 +40,11 @@ public class RegisterDataFactory {
     public static RegisterPageDataObject alphabeticalValuesInPhoneNumber() {
         var registerData = new RegisterPageDataObject();
 
-        registerData.setFirstName(RandomDataUtils.generateRandomFirstName());
-        registerData.setLastName(RandomDataUtils.generateRandomLastName());
-        registerData.setEmail(RandomDataUtils.generateRandomEmail());
-        registerData.setTelephone(RandomDataUtils.generateRandomAlphabetical());
-        registerData.setPassword(RandomDataUtils.generateRandomPassword());
+        registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
+        registerData.setLastName(RandomDataGenerator.generateRandomLastName());
+        registerData.setEmail(RandomDataGenerator.generateRandomEmail());
+        registerData.setTelephone(RandomDataGenerator.generateRandomAlphabetical());
+        registerData.setPassword(RandomDataGenerator.generateRandomPassword());
         registerData.setConfirmPassword(registerData.getPassword());
         registerData.setSubscribe("yes");
 

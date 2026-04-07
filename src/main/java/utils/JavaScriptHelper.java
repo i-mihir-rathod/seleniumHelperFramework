@@ -4,13 +4,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
-public class JavascriptHelper {
+public class JavaScriptHelper {
 
     protected JavascriptExecutor js;
     protected WaitUtils wait;
 
-    public JavascriptHelper(WebDriver driver) {
+    public JavaScriptHelper(WebDriver driver) {
         js = (JavascriptExecutor) driver;
         wait = new WaitUtils(driver);
     }
@@ -51,7 +50,7 @@ public class JavascriptHelper {
     }
 
     public void uploadFile(WebElement element, String fileName, boolean isMultiple) {
-        var file = FileHelper.getUploadFilePath(fileName);
+        var file = FilePathHelper.getUploadFilePath(fileName);
         String script =
                 "var target = arguments[0];" +
                         "var input = document.createElement('input');" +
