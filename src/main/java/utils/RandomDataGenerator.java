@@ -3,15 +3,10 @@ package utils;
 import java.util.Random;
 import java.util.UUID;
 
-public class RandomDataUtils {
+public class RandomDataGenerator {
 
     private static final Random random = new Random();
 
-    /**
-     * Generates a random first name.
-     *
-     * @return A random first name string.
-     */
     public static String generateRandomFirstName() {
         String[] firstNames = {"John", "Jane", "Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Henry"};
         return firstNames[random.nextInt(firstNames.length)] + UUID.randomUUID().toString().substring(0, 3);
@@ -22,11 +17,6 @@ public class RandomDataUtils {
         return firstNames[random.nextInt(firstNames.length)] + UUID.randomUUID().toString().substring(0, length);
     }
 
-    /**
-     * Generates a random last name.
-     *
-     * @return A random last name string.
-     */
     public static String generateRandomLastName() {
         String[] lastNames = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez"};
         return lastNames[random.nextInt(lastNames.length)] + UUID.randomUUID().toString().substring(0, 3);
@@ -37,11 +27,6 @@ public class RandomDataUtils {
         return lastNames[random.nextInt(lastNames.length)] + UUID.randomUUID().toString().substring(0, length);
     }
 
-    /**
-     * Generates a random email address.
-     *
-     * @return A random email string.
-     */
     public static String generateRandomEmail() {
         String uniqueId = UUID.randomUUID().toString().substring(0, 8);
         return "test" + uniqueId + "@test.com";
@@ -52,11 +37,6 @@ public class RandomDataUtils {
         return "test" + uniqueId + "@test.com";
     }
 
-    /**
-     * Generates a random phone number (Indian style, starting with 9).
-     *
-     * @return A random phone number string.
-     */
     public static String generateRandomPhoneNumber() {
         StringBuilder phone = new StringBuilder("9"); // start with 9 (valid Indian style)
 
@@ -129,12 +109,6 @@ public class RandomDataUtils {
         return result.toString();
     }
 
-    /**
-     * Generates a random uppercase (capital) letter string.
-     *
-     * @param length The desired length of the string.
-     * @return A random uppercase letter string.
-     */
     public static String generateRandomCapitalLetters(int length) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder result = new StringBuilder();
@@ -153,12 +127,6 @@ public class RandomDataUtils {
         return result.toString();
     }
 
-    /**
-     * Generates a random lowercase (small) letter string.
-     *
-     * @param length The desired length of the string.
-     * @return A random lowercase letter string.
-     */
     public static String generateRandomSmallLetters(int length) {
         String chars = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder result = new StringBuilder();
@@ -177,12 +145,6 @@ public class RandomDataUtils {
         return result.toString();
     }
 
-    /**
-     * Generates a random numeric string (numbers only).
-     *
-     * @param length The desired length of the string.
-     * @return A random numeric string.
-     */
     public static String generateRandomNumeric(int length) {
         String chars = "0123456789";
         StringBuilder result = new StringBuilder();
@@ -201,12 +163,6 @@ public class RandomDataUtils {
         return result.toString();
     }
 
-    /**
-     * Generates a random alphanumeric string with special characters.
-     *
-     * @param length The desired length of the string.
-     * @return A random alphanumeric string with special characters.
-     */
     public static String generateRandomAlphanumericWithSpecial(int length) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*_-+=";
         StringBuilder result = new StringBuilder();

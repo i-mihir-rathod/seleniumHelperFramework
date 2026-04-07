@@ -10,14 +10,14 @@ import java.util.Objects;
 public class SeleniumHelper {
     protected WebDriver driver;
     protected WaitUtils wait;
-    protected JavascriptHelper js;
+    protected JavaScriptHelper js;
     protected FluentWaitUtils fw;
 
 
     public SeleniumHelper(WebDriver driver) {
         this.driver = driver;
         this.wait = new WaitUtils(driver);
-        this.js = new JavascriptHelper(driver);
+        this.js = new JavaScriptHelper(driver);
         this.fw = new FluentWaitUtils(driver);
     }
 
@@ -69,7 +69,7 @@ public class SeleniumHelper {
     }
 
     public void uploadFile(By by, String fileName) {
-        var file = FileHelper.getUploadFilePath(fileName);
+        var file = FilePathHelper.getUploadFilePath(fileName);
         var element = wait.waitForElementPresenceInDOM(by);
         js.scrollToElementIfNotInView(element);
         if (Objects.equals(element.getDomAttribute("type"), "input")) {
