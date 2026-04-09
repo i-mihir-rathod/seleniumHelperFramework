@@ -1,16 +1,16 @@
 package dataFactories;
 
-import dataObjects.RegisterPageDataObject;
+import dataObjects.RegisterDetails;
 import utils.RandomDataGenerator;
 
 public class RegisterDataFactory {
 
-    public static RegisterPageDataObject blankData() {
-        return new RegisterPageDataObject();
+    public static RegisterDetails blankData() {
+        return new RegisterDetails();
     }
 
-    public static RegisterPageDataObject validData() {
-        var registerData = new RegisterPageDataObject();
+    public static RegisterDetails validData() {
+        var registerData = new RegisterDetails();
 
         registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
         registerData.setLastName(RandomDataGenerator.generateRandomLastName());
@@ -23,8 +23,8 @@ public class RegisterDataFactory {
         return registerData;
     }
 
-    public static RegisterPageDataObject passwordMismatched() {
-        var registerData = new RegisterPageDataObject();
+    public static RegisterDetails passwordMismatched() {
+        var registerData = new RegisterDetails();
 
         registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
         registerData.setLastName(RandomDataGenerator.generateRandomLastName());
@@ -37,8 +37,8 @@ public class RegisterDataFactory {
         return registerData;
     }
 
-    public static RegisterPageDataObject alphabeticalValuesInPhoneNumber() {
-        var registerData = new RegisterPageDataObject();
+    public static RegisterDetails alphabeticalValuesInPhoneNumber() {
+        var registerData = new RegisterDetails();
 
         registerData.setFirstName(RandomDataGenerator.generateRandomFirstName());
         registerData.setLastName(RandomDataGenerator.generateRandomLastName());

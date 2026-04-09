@@ -1,6 +1,6 @@
 package utils;
 
-import dataObjects.RegisterPageDataObject;
+import dataObjects.RegisterDetails;
 
 import java.io.FileWriter;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ public class UserDataManager {
     private static final String FILE_PATH = FilePathHelper.getUserDataPath("user.txt");
 
     // Save user data
-    public static void saveUser(RegisterPageDataObject user) {
+    public static void saveUser(RegisterDetails user) {
         try {
             FileWriter writer = new FileWriter(FILE_PATH);
 
@@ -26,11 +26,11 @@ public class UserDataManager {
     }
 
     // Get user data
-    public static RegisterPageDataObject getUser() {
+    public static RegisterDetails getUser() {
         try {
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
 
-            RegisterPageDataObject user = new RegisterPageDataObject();
+            RegisterDetails user = new RegisterDetails();
 
             user.setEmail(lines.get(0));
             user.setPassword(lines.get(1));

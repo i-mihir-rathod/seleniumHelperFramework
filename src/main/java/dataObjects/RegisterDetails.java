@@ -3,7 +3,7 @@ package dataObjects;
 import lombok.Data;
 
 @Data
-public class RegisterPageDataObject {
+public class RegisterDetails {
     private String firstName;
     private String lastName;
     private String email;

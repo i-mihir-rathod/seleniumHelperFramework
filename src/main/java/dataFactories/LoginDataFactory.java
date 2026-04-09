@@ -1,15 +1,18 @@
 package dataFactories;
 
 import dataObjects.LoginDetails;
+import dataObjects.RegisterDetails;
 import utils.RandomDataGenerator;
 import utils.UserDataManager;
 
 public class LoginDataFactory {
 
-    public static LoginDetails validLoginDetails() {
-        var loginDetails = new LoginDetails();
-        loginDetails.setEmail(UserDataManager.getUser().getEmail());
-        loginDetails.setPassword(UserDataManager.getUser().getEmail());
+    static RegisterDetails registerData = new RegisterDetails();
+
+    public static LoginDetails validLoginDetails(RegisterDetails registerUserDetails) {
+        var loginDetails  = new LoginDetails();
+        loginDetails.setEmail(registerUserDetails.getEmail());
+        loginDetails.setPassword(registerUserDetails.getPassword());
 
         return loginDetails;
     }

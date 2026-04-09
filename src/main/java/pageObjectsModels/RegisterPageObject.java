@@ -1,6 +1,6 @@
 package pageObjectsModels;
 
-import dataObjects.RegisterPageDataObject;
+import dataObjects.RegisterDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -144,7 +144,7 @@ public class RegisterPageObject extends BasePageObject {
     }
 
     // ============ Helper Methods ============
-    public void fillRegisterForm(RegisterPageDataObject registerData) {
+    public void fillRegisterForm(RegisterDetails registerData) {
         enterFirstName(registerData.getFirstName());
         enterLastName(registerData.getLastName());
         enterEmail(registerData.getEmail());
