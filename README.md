@@ -23,6 +23,9 @@ The framework automates testing of the OpenCart demo site located at `https://na
 - Currency selection
 - Navigation and UI interactions
 
+### Test Independence
+To ensure tests can run independently without external dependencies (e.g., files or prior test execution), the framework includes setup helpers. For example, login tests use a register helper to create users on-the-fly without saving data to files, allowing login tests to execute standalone.
+
 ## Architecture
 
 The framework is built using the following technologies and patterns:
@@ -74,6 +77,9 @@ mvn test
 ### Run Specific Test Class
 ```
 mvn test -Dtest=homePageTestCases
+mvn test -Dtest=LoginPageTestCases
+mvn test -Dtest=RegisterPageTestCases
+mvn test -Dtest=CartPageTestCases
 ```
 
 ### Run Specific Test Method
@@ -89,12 +95,15 @@ You can modify the `Base.java` class to change browser settings or test URL.
 ```
 seleniumHelperFramework/
 ├── pom.xml                           # Maven configuration
+├── README.md                         # Project documentation
 ├── src/
 │   ├── main/java/
 │   │   ├── dataFactories/            # Test data generation
+│   │   │   ├── LoginDataFactory.java
 │   │   │   ├── ProductDataFactory.java
 │   │   │   └── RegisterDataFactory.java
 │   │   ├── dataObjects/              # Data transfer objects
+│   │   │   ├── LoginDetails.java
 │   │   │   ├── ProductDetails.java
 │   │   │   └── RegisterPageDataObject.java
 │   │   ├── pageObjectsModels/        # Page Object classes
@@ -105,19 +114,24 @@ seleniumHelperFramework/
 │   │   │   ├── SearchPageObject.java
 │   │   │   └── ShoppingCartPageObject.java
 │   │   └── utils/                    # Utility classes
-│   │       ├── FileHelper.java
+│   │       ├── FilePathHelper.java
 │   │       ├── FluentWaitUtils.java
-│   │       ├── JavascriptHelper.java
-│   │       ├── RandomDataUtils.java
+│   │       ├── JavaScriptHelper.java
+│   │       ├── RandomDataGenerator.java
 │   │       ├── SeleniumHelper.java
+│   │       ├── UserDataManager.java
 │   │       └── WaitUtils.java
 │   └── test/java/
 │       ├── Base.java                 # Base test class
 │       ├── CartPageTestCases.java    # Cart page tests
 │       ├── homePageTestCases.java    # Home page tests
-│       └── RegisterPageTestCases.java # Registration tests
+│       ├── LoginPageTestCases.java   # Login page tests
+│       ├── RegisterPageTestCases.java # Registration tests
+│       └── utils/                    # Test utilities
+│           └── DriverFactory.java    # WebDriver factory
 ├── target/                           # Compiled classes and test reports
 ├── Screenshots/                      # Failure screenshots
+├── memoryBox/                        # Temporary storage for test artifacts
 └── uploadFiles/                      # Test files for upload tests
 ```
 

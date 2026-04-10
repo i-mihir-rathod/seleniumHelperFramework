@@ -2,6 +2,7 @@ import dataFactories.LoginDataFactory;
 import dataFactories.RegisterDataFactory;
 import dataObjects.LoginDetails;
 import dataObjects.RegisterDetails;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +19,8 @@ public class LoginPageTestCases extends Base {
 
     @BeforeClass
     public void beforeClass() {
-        var driver = DriverFactory.getDriver("chrome");
+        Dotenv dotenv = Dotenv.load();
+        var driver = DriverFactory.getDriver(dotenv.get("BROWSER"));
         driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/register");
 
         // call setup method to register user

@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 import pageObjectsModels.HomePageObject;
 import pageObjectsModels.LoginPageObject;
 import pageObjectsModels.RegisterPageObject;
-import utils.UserDataManager;
 
 public class RegisterPageTestCases extends Base {
 
@@ -109,9 +108,6 @@ public class RegisterPageTestCases extends Base {
         registerPage.fillRegisterForm(user);
         registerPage.agreePrivacyPolicy();
         registerPage.clickOnContinueBtn();
-
-        // save user data
-        UserDataManager.saveUser(user);
     }
     
     // ============ Helper Methods ============

@@ -3,7 +3,6 @@ package dataFactories;
 import dataObjects.LoginDetails;
 import dataObjects.RegisterDetails;
 import utils.RandomDataGenerator;
-import utils.UserDataManager;
 
 public class LoginDataFactory {
 
@@ -27,7 +26,7 @@ public class LoginDataFactory {
 
     public static LoginDetails invalidPassword() {
         var loginDetails = new LoginDetails();
-        loginDetails.setEmail(UserDataManager.getUser().getEmail());
+        loginDetails.setEmail(loginDetails.getEmail());
         loginDetails.setPassword(RandomDataGenerator.generateRandomPassword());
 
         return loginDetails;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" thread-count="5" parallel="classes">
+
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/NSR/Desktop/mihir/seleniumHelperFramework/src/test/java">
+        <classes>
+            <class name="CartPageTestCases"/>
+            <class name="homePageTestCases"/>
+            <class name="RegisterPageTestCases"/>
+            <class name="LoginPageTestCases"/>
+        </classes>
+    </test>
+</suite>
