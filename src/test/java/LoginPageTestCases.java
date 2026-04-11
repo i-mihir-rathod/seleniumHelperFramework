@@ -28,9 +28,21 @@ public class LoginPageTestCases extends Base {
     }
 
     @Test
+    public void loginWithBlankUser(){
+        // initialize page object
+        var loginPage = navigateToLoginPage();
+
+        loginPage.clickOnLoginBtn();
+
+        loginPage.isWarningMessageDisplayed();
+
+        Assert.assertEquals(loginPage.getWarningMsgText(), "Warning: No match for E-Mail Address and/or Password.", "Warning message not matched");
+    }
+
+    @Test
     public void loginWithValidUser() {
         // initialize page objects
-        LoginPageObject loginPage = navigateToLoginPage();
+        var loginPage = navigateToLoginPage();
 
         loginPage.fillLoginForm(validUser);
     }

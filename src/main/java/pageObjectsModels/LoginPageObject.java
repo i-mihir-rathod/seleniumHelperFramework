@@ -12,6 +12,7 @@ public class LoginPageObject extends BasePageObject {
     private final By passwordInput = By.id("input-password");
     private final By forgotPasswordLink = By.linkText("Forgotten Password");
     private final By loginBtn = By.xpath("//input[@value = 'Login']");
+    private final By warningMsg = By.xpath("//div[contains(@class, 'alert-danger')]");
 
     // ============ Constructor ============
     public LoginPageObject(WebDriver driver) {
@@ -38,6 +39,14 @@ public class LoginPageObject extends BasePageObject {
 
     public void clickOnLoginBtn() {
         seleniumHelper.clickOnElement(loginBtn);
+    }
+
+    public void isWarningMessageDisplayed() {
+        seleniumHelper.isElementDisplayed(warningMsg);
+    }
+
+    public String getWarningMsgText() {
+        return seleniumHelper.getText(warningMsg);
     }
 
     // ============ Helper Method ============

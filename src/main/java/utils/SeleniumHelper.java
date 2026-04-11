@@ -45,7 +45,7 @@ public class SeleniumHelper {
     public String getText(By by) {
         var element = wait.waitUntilElementToBeVisible(by);
         js.scrollToElementIfNotInView(element);
-        return element.getText();
+        return element.getText().trim();
     }
 
     public List<String> getTextFromList(By by) {
