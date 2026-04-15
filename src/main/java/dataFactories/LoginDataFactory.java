@@ -6,8 +6,6 @@ import utils.RandomDataGenerator;
 
 public class LoginDataFactory {
 
-    static RegisterDetails registerData = new RegisterDetails();
-
     public static LoginDetails validLoginDetails(RegisterDetails registerUserDetails) {
         var loginDetails  = new LoginDetails();
         loginDetails.setEmail(registerUserDetails.getEmail());
@@ -24,10 +22,18 @@ public class LoginDataFactory {
         return loginDetails;
     }
 
-    public static LoginDetails invalidPassword() {
-        var loginDetails = new LoginDetails();
-        loginDetails.setEmail(loginDetails.getEmail());
+    public static LoginDetails invalidPassword(LoginDetails loginUserDetails) {
+        var loginDetails  = new LoginDetails();
+        loginDetails.setEmail(loginUserDetails.getEmail());
         loginDetails.setPassword(RandomDataGenerator.generateRandomPassword());
+
+        return loginDetails;
+    }
+
+    public static LoginDetails invalidEmail(LoginDetails loginUserDetails) {
+        var loginDetails  = new LoginDetails();
+        loginDetails.setEmail(RandomDataGenerator.generateRandomEmail());
+        loginDetails.setPassword(loginUserDetails.getPassword());
 
         return loginDetails;
     }

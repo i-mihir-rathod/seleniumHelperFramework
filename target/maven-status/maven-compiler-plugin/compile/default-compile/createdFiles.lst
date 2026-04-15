@@ -2,6 +2,7 @@ utils\UserDataManager.class
 dataFactories\ProductDataFactory.class
 dataFactories\LoginDataFactory.class
 utils\SeleniumHelper.class
+utils\UserRegistrationHelper.class
 pageObjectsModels\ShoppingCartPageObject.class
 pageObjectsModels\SearchPageObject.class
 dataObjects\RegisterDetails.class

@@ -56,11 +56,6 @@ public class HomePageObject extends BasePageObject {
 
     // ============ Actions ============
 
-    /**
-     * Selects a currency from the currency dropdown menu
-     *
-     * @param currency The currency code to select
-     */
     public void selectCurrency(String currency) {
         seleniumHelper.clickOnElement(currencyBtn);
         seleniumHelper.clickOnElement(currencyDropdown(currency));
@@ -76,21 +71,11 @@ public class HomePageObject extends BasePageObject {
         seleniumHelper.clickOnElement(loginLink);
     }
 
-    /**
-     * Searches for a product by name
-     *
-     * @param productName The name of the product to search
-     */
     public void searchProduct(String productName) {
         seleniumHelper.enterText(searchInput, productName);
         seleniumHelper.clickOnElement(searchBtn);
     }
 
-    /**
-     * Adds one or multiple products to the shopping cart
-     *
-     * @param itemNames Variable length parameter for product names to add
-     */
     public void addProductsToCart(ProductDetails itemNames) {
         seleniumHelper.clickUsingFluent(productAddToCartBtn(itemNames.getName()));
     }
@@ -101,14 +86,8 @@ public class HomePageObject extends BasePageObject {
 
     public void clickOnMiniCart() {
         waitForSuccessMessage();
-        seleniumHelper.clickOnElement(miniCartBtn);
+        seleniumHelper.clickUsingFluent(miniCartBtn);
     }
-
-    /**
-     * Retrieves the list of items currently in the shopping cart
-     *
-     * @return List of product names in the cart
-     */
 
     public List<String> getMiniCartItemsPriceText() {
         return seleniumHelper.getTextFromList(cartItemsPriceList);
@@ -134,12 +113,6 @@ public class HomePageObject extends BasePageObject {
         return seleniumHelper.isElementDisplayed(getTotalCartItemDropdown(number));
     }
 
-    /**
-     * Verifies if a product is displayed in the shopping cart
-     *
-     * @param productName The name of the product to verify
-     * @return true if product is displayed, false otherwise
-     */
     public boolean isProductInCart(ProductDetails productName) {
         return seleniumHelper.isElementDisplayed(getProductNameInCart(productName.getName()));
     }
