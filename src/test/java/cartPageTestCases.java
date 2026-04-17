@@ -5,7 +5,7 @@ import pageObjectsModels.ShoppingCartPageObject;
 
 import java.util.Objects;
 
-public class CartPageTestCases extends Base {
+public class cartPageTestCases extends Base {
 
     // Test: Open shopping cart when empty
     @Test

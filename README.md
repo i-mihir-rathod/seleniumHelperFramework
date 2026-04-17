@@ -287,14 +287,19 @@ The `UserRegistrationHelper` is a utility class that handles user registration f
 #### 1. Basic Registration (generates random user data)
 ```java
 public class LoginPageTestCases extends Base {
-    private RegisterDetails user;
-    private LoginDetails validUser;
+   private final RegisterDetails user = RegisterDataFactory.validData();
+   private LoginDetails validUser;
 
-    @BeforeMethod
+    @BeforeClass
     public void registerUserBeforeTest() {
-        // Register a new user before each test without saving data
-        user = UserRegistrationHelper.registerUserWithoutSavingData(driver);
-        validUser = LoginDataFactory.validLoginDetails(user);
+       // Register a new user before each test without saving data
+       Dotenv dotenv = Dotenv.load();
+       driver = DriverFactory.getDriver(dotenv.get("BROWSER"));
+
+       driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/register");
+
+       var user1 = UserRegistrationHelper.registerUserWithoutSavingData(driver, user);
+       validUser = LoginDataFactory.validLoginDetails(user1);
     }
 
     @Test

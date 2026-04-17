@@ -21,6 +21,7 @@ public class RegisterPageObject extends BasePageObject {
     private final By subscribeCheckBoxNo = By.xpath("//label[normalize-space()='No']/input");
     private final By loginPageLink = By.partialLinkText("login page");
     private final By warningMsg = By.xpath("//div[contains(@class, 'alert-danger')]");
+    private final By successRegisteredMsg = By.xpath("//div[@id = 'content']/h1");
 
     // ============ Dynamic Locators  ============
 
@@ -81,6 +82,10 @@ public class RegisterPageObject extends BasePageObject {
 
     public void clickOnLoginPageLink() {
         seleniumHelper.clickOnElement(loginPageLink);
+    }
+
+    public String getSuccessRegisteredMsg() {
+        return seleniumHelper.getText(successRegisteredMsg);
     }
 
     // ============ Error Messages Actions Methods ============

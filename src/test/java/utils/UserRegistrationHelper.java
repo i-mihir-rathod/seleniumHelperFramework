@@ -2,6 +2,7 @@ package utils;
 
 import dataObjects.RegisterDetails;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import pageObjectsModels.RegisterPageObject;
 
 public class UserRegistrationHelper {
@@ -14,6 +15,9 @@ public class UserRegistrationHelper {
         registerPage.fillRegisterForm(user);
         registerPage.agreePrivacyPolicy();
         registerPage.clickOnContinueBtn();
+
+        // verify success registered message
+        Assert.assertEquals(registerPage.getSuccessRegisteredMsg(), "Your Account Has Been Created!", "User registration failed");
 
         driver.quit();
 

@@ -5,7 +5,7 @@ import pageObjectsModels.HomePageObject;
 import pageObjectsModels.LoginPageObject;
 import pageObjectsModels.RegisterPageObject;
 
-public class RegisterPageTestCases extends Base {
+public class registerPageTestCases extends Base {
 
     @Test
     public void clickOnRegisterPageLink() {
@@ -108,6 +108,9 @@ public class RegisterPageTestCases extends Base {
         registerPage.fillRegisterForm(user);
         registerPage.agreePrivacyPolicy();
         registerPage.clickOnContinueBtn();
+
+        // verify success registered message
+        Assert.assertEquals(registerPage.getSuccessRegisteredMsg(), "Your Account Has Been Created!", "User registration failed");
     }
     
     // ============ Helper Methods ============

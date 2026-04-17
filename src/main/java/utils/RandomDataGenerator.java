@@ -27,14 +27,24 @@ public class RandomDataGenerator {
         return lastNames[random.nextInt(lastNames.length)] + UUID.randomUUID().toString().substring(0, length);
     }
 
+    /**
+     * Generates a random email address using the yopmail domain.
+     * The generated email can be used for registration, and verification codes
+     * can be retrieved from the yopmail website.
+     */
     public static String generateRandomEmail() {
         String uniqueId = UUID.randomUUID().toString().substring(0, 8);
-        return "test" + uniqueId + "@test.com";
+        return "test" + uniqueId + "@yopmail.com";
     }
 
+    /**
+     * Generates a random email address using the yopmail domain with a specified length for the unique ID.
+     * The generated email can be used for registration, and verification codes
+     * can be retrieved from the yopmail website.
+     */
     public static String generateRandomEmail(int length) {
         String uniqueId = UUID.randomUUID().toString().substring(0, length);
-        return "test" + uniqueId + "@test.com";
+        return "test" + uniqueId + "@yopmail.com";
     }
 
     public static String generateRandomPhoneNumber() {

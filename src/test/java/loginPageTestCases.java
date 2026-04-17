@@ -13,13 +13,13 @@ import pageObjectsModels.RegisterPageObject;
 import utils.DriverFactory;
 import utils.UserRegistrationHelper;
 
-public class LoginPageTestCases extends Base {
+public class loginPageTestCases extends Base {
 
     private final RegisterDetails user = RegisterDataFactory.validData();
     private LoginDetails validUser;
 
     @BeforeClass
-    public void registerUserBeforeTest() {
+    private void registerUserBeforeTest() {
         // Register a new user before each test without saving data
         Dotenv dotenv = Dotenv.load();
         driver = DriverFactory.getDriver(dotenv.get("BROWSER"));

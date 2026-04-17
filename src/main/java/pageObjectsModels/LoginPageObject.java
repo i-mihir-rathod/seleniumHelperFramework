@@ -46,8 +46,8 @@ public class LoginPageObject extends BasePageObject {
         seleniumHelper.clickOnElement(continueBtn);
     }
 
-    public void isWarningMessageDisplayed() {
-        seleniumHelper.isElementDisplayed(warningMsg);
+    public boolean isWarningMessageDisplayed() {
+        return seleniumHelper.isElementDisplayed(warningMsg);
     }
 
     public String getWarningMsgText() {
