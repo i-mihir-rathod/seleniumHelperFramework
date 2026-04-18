@@ -1,6 +1,5 @@
 import dataFactories.ProductDataFactory;
 import dataObjects.ProductDetails;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjectsModels.*;
@@ -166,13 +165,6 @@ public class homePageTestCases extends Base {
 
         String cartUrl = driver.getCurrentUrl();
         Assert.assertTrue(Objects.requireNonNull(cartUrl).contains("cart"), "User Not redirected on cart page");
-    }
-
-    @Test
-    public void ignore() {
-        driver.get("https://the-internet.herokuapp.com/upload");
-
-        var element = driver.findElement(By.id("file-upload"));
     }
 
     @Test

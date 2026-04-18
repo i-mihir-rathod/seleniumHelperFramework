@@ -49,8 +49,7 @@ public class JavaScriptHelper {
         return (String) js.executeScript("arguments[0].textContent;", element);
     }
 
-    public void uploadFile(WebElement element, String fileName, boolean isMultiple) {
-        var file = FilePathHelper.getUploadFilePath(fileName);
+    public void uploadFile(WebElement element, String filePath, boolean isMultiple) {
         String script =
                 "var target = arguments[0];" +
                         "var input = document.createElement('input');" +
@@ -74,7 +73,7 @@ public class JavaScriptHelper {
         var input = (WebElement) js.executeScript(script, element);
 
         if (input != null) {
-            input.sendKeys(file);
+            input.sendKeys(filePath);
         } else {
             throw new RuntimeException("File upload failed - unable to attach file");
         }

@@ -72,9 +72,10 @@ public class SeleniumHelper {
         var file = FilePathHelper.getUploadFilePath(fileName);
         var element = wait.waitForElementPresenceInDOM(by);
         js.scrollToElementIfNotInView(element);
-        if (Objects.equals(element.getDomAttribute("type"), "input")) {
+
+        try {
             element.sendKeys(file);
-        } else {
+        } catch (Exception e) {
             js.uploadFile(element, file, false);
         }
     }

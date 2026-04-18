@@ -39,6 +39,6 @@ public class Base {
             var destination = new File(FilePathHelper.getFailedCaseScreenShotPath(result.getName()));
             FileUtils.copyFile(src, destination);
         }
-        driver.quit();
+//        driver.quit();
     }
 }

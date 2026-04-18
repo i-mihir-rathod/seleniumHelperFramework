@@ -1,9 +1,12 @@
+pageObjectsModels\ForgotPasswordPageObject.class
 utils\UserDataManager.class
 dataFactories\ProductDataFactory.class
+dataObjects\ForgotPasswordDetails.class
 dataFactories\LoginDataFactory.class
+utils\DriverFactory.class
 utils\SeleniumHelper.class
-utils\UserRegistrationHelper.class
 pageObjectsModels\ShoppingCartPageObject.class
+dataFactories\ForgotPasswordDataFactory.class
 pageObjectsModels\SearchPageObject.class
 dataObjects\RegisterDetails.class
 utils\WaitUtils.class
@@ -17,4 +20,5 @@ dataObjects\LoginDetails.class
 utils\JavaScriptHelper.class
 dataFactories\RegisterDataFactory.class
 dataObjects\ProductDetails.class
+pageObjectsModels\UploadFilePageObject.class
 utils\FluentWaitUtils.class
