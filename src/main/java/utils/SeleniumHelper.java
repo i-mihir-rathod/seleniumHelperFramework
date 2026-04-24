@@ -62,6 +62,12 @@ public class SeleniumHelper {
         fw.clickOnElement(element);
     }
 
+    public void clickUsingJS(By by) {
+        var element = wait.waitUntilElementToBeClickable(by);
+        js.scrollToElementIfNotInView(element);
+        js.clickOnElementUsingJs(element);
+    }
+
     public void clickOnElement(By by) {
         var element = wait.waitUntilElementToBeClickable(by);
         js.scrollToElementIfNotInView(element);

@@ -50,32 +50,44 @@ public class JavaScriptHelper {
     }
 
     public void uploadFile(WebElement element, String filePath, boolean isMultiple) {
-        String script =
-                "var target = arguments[0];" +
-                        "var input = document.createElement('input');" +
-                        "input.type = 'file';" +
-                        (isMultiple ? "input.multiple = true;" : "") +
+        var jsQuery =
+                """
+                var target = arguments[0],
+                offsetX = arguments[1],
+                offsetY = arguments[2],
+                document = target.ownerDocument || document,
+                window = document.defaultView || window;
+        
+                var input = document.createElement('INPUT');
+                input.type = 'file';
+                """
+                        + (isMultiple ? "input.multiple = true;" : "")
+                        + """
+        input.onchange = function () {
+         var rect = target.getBoundingClientRect(),
+          x = rect.left + (offsetX || (rect.width >> 1)),
+          y = rect.top + (offsetY || (rect.height >> 1)),
+          dataTransfer = { files: this.files };
 
-                        "input.onchange = function() {" +
-                        "  var dataTransfer = { files: this.files };" +
+        ['dragenter', 'dragover', 'drop'].forEach(function (name) {
+          var evt = document.createEvent('MouseEvent');
+          evt.initMouseEvent(name, !0, !0, window, 0, 0, 0, x, y, !1, !1, !1, !1, 0, null);
+          evt.dataTransfer = dataTransfer;
+          target.dispatchEvent(evt);
+        });
 
-                        "  ['dragenter','dragover','drop'].forEach(function(eventName) {" +
-                        "    var event = new DragEvent(eventName, { dataTransfer: dataTransfer });" +
-                        "    target.dispatchEvent(event);" +
-                        "  });" +
+        setTimeout(function () { document.body.removeChild(input); }, 25);
+      };
+      document.body.appendChild(input);
+      return input;
+      """;
 
-                        "  document.body.removeChild(input);" +
-                        "};" +
+        var fileInput = (WebElement) js.executeScript(jsQuery, element, 0, 0);
+        if (fileInput != null) fileInput.sendKeys(filePath);
+        else throw new RuntimeException("File input button not available for upload file");
+    }
 
-                        "document.body.appendChild(input);" +
-                        "return input;";
-
-        var input = (WebElement) js.executeScript(script, element);
-
-        if (input != null) {
-            input.sendKeys(filePath);
-        } else {
-            throw new RuntimeException("File upload failed - unable to attach file");
-        }
+    public void clickOnElementUsingJs(WebElement element) {
+        js.executeScript("arguments[0].click();", element);
     }
 }

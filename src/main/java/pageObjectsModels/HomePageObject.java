@@ -80,7 +80,7 @@ public class HomePageObject extends BasePageObject {
         seleniumHelper.clickUsingFluent(productAddToCartBtn(itemNames.getName()));
     }
 
-    public void openShoppingCart() {
+    public void clickOnShoppingCartLink() {
         seleniumHelper.clickOnElement(shoppingCartLink);
     }
 

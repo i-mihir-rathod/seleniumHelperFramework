@@ -5,10 +5,12 @@
     <test verbose="2" preserve-order="true"
           name="C:/Users/NSR/Desktop/mihir/seleniumHelperFramework/src/test/java">
         <classes>
-            <class name="CartPageTestCases"/>
+            <class name="cartPageTestCases"/>
             <class name="homePageTestCases"/>
-            <class name="RegisterPageTestCases"/>
-            <class name="LoginPageTestCases"/>
+            <class name="registerPageTestCases"/>
+            <class name="loginPageTestCases"/>
+            <class name="forgotPageTestCases"/>
+            <class name="uploadFile"/>
         </classes>
     </test>
 </suite>

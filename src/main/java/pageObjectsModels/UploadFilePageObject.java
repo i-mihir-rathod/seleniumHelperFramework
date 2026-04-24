@@ -9,6 +9,8 @@ public class UploadFilePageObject extends BasePageObject{
     private final By fileUploadInput = By.xpath("//input[@id = 'file-upload']");
     private final By dragAndDropFileInput = By.id("drag-drop-upload");
     private final By uploadBtn = By.id("file-submit");
+    private final By uploadFileStatusText = By.xpath("//div[@class = 'example']/h3");
+    private final By uploadedFileName = By.xpath("//div[@class = 'example']/div");
 
     // ============ Constructor ============
     public UploadFilePageObject(WebDriver driver) {
@@ -26,6 +28,14 @@ public class UploadFilePageObject extends BasePageObject{
 
     public void clickOnUploadBtn() {
         seleniumHelper.clickOnElement(uploadBtn);
+    }
+
+    public String getUploadFileStatusText() {
+        return seleniumHelper.getText(uploadFileStatusText);
+    }
+
+    public String getUploadedFileName() {
+        return seleniumHelper.getText(uploadedFileName);
     }
 
 }

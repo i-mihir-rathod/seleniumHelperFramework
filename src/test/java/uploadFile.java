@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjectsModels.UploadFilePageObject;
 
@@ -10,10 +11,17 @@ public class uploadFile extends Base{
 
         // navigate to upload file page
         navigateToUploadFilePage();
+        String fileName = "Screenshot.png";
 
         // upload file
-        uploadFilePage.setFileUploadInput("Screenshot.png");
+        uploadFilePage.setFileUploadInput(fileName);
         uploadFilePage.clickOnUploadBtn();
+
+        // verify status text
+        Assert.assertEquals(uploadFilePage.getUploadFileStatusText(), "File Uploaded!");
+
+        // verify uploaded file name
+        Assert.assertEquals(uploadFilePage.getUploadedFileName(), fileName);
     }
 
     @Test
@@ -25,8 +33,15 @@ public class uploadFile extends Base{
         navigateToUploadFilePage();
 
         // upload file
-        uploadFilePage.uploadFileUsingDragAndDrop("Screenshot.png");
+        String fileName = "Screenshot.png";
+        uploadFilePage.uploadFileUsingDragAndDrop(fileName);
 //        uploadFilePage.clickOnUploadBtn();
+//
+//        // verify status text
+//        Assert.assertEquals(uploadFilePage.getUploadFileStatusText(), "File Uploaded!");
+//
+//        // verify uploaded file name
+//        Assert.assertEquals(uploadFilePage.getUploadedFileName(), fileName);
     }
 
     // ============ Private Helper Methods ============

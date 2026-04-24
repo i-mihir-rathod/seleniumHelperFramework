@@ -48,7 +48,7 @@ public class cartPageTestCases extends Base {
         ShoppingCartPageObject cartPage = new ShoppingCartPageObject(driver);
 
         // Step 2: Open shopping cart
-        homePage.openShoppingCart();
+        homePage.clickOnShoppingCartLink();
 
         // Step 3: Verify shopping cart page URL
         String cartUrl = driver.getCurrentUrl();
